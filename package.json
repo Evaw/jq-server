@@ -1,0 +1,12 @@
+{
+  "name": "jq-server",
+  "scripts": {
+    "start:dev": "DEBUG=jq-server node server",
+    "start": "node server"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "execa": "^8.0.1",
+    "express": "^4.19.2"
+  }
+}

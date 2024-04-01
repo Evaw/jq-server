@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      #jq-query {
+      }
+      .code-area {
+        flex: 1;
+        display: flex;
+      }
+      #json-input-container {
+        flex: 1;
+      }
+      #json {
+        width: 100%;
+        padding: 0;
+      }
+      #result-container {
+        flex: 1 1 0;
+        max-width: 50%;
+      }
+      #result {
+        padding: 0;
+        margin: 0;
+        text-overflow: clip;
+        text-wrap: wrap;
+      }
+      * {
+        font-family: monospace;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>jq query</div>
+    <input id="jq-query" class="" />
+    <div>json</div>
+    <div class="code-area">
+      <div id="json-input-container">
+        <textarea id="json" class="" rows="20"></textarea>
+      </div>
+      <div id="result-container">
+        <pre id="result"></pre>
+      </div>
+    </div>
+  </body>
+  <script src="./js/main.js"></script>
+</html>
