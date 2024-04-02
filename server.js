@@ -17,6 +17,7 @@ const debug = (...args) => {
     const query = req.body.query;
     const data = req.body.data;
     const args = ["-r", query];
+    // await new Promise(res => setTimeout(res, Math.random() * 5000))
     try {
       debug({
         args,
@@ -30,7 +31,7 @@ const debug = (...args) => {
       res.send({response: stdout});
     } catch (e){
       debug(e);
-      res.send({response: data, hasError});
+      res.send({response: data, hasError: true, error: e});
     }
   });
 

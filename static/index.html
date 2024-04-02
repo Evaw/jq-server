@@ -35,15 +35,18 @@
       * {
         font-family: monospace;
       }
+      #error-area {
+        color: red;;
+      }
     </style>
   </head>
 
   <body>
     <div>jq query</div>
     <input id="jq-query" class="" />
-    <div>json</div>
+    <div>json <span id="error-area"></span></div>
     <div class="code-area">
-      <div id="json-input-container">
+      <div name="json-input-container" id="json-input-container" autocomplete="[{id: .[].id}]">
         <textarea id="json" class="" rows="20"></textarea>
       </div>
       <div id="result-container">

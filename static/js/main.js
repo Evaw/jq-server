@@ -1,5 +1,7 @@
 (async function () {
   console.log("jq server");
+  let oldquery = '';
+  let olddata = '';
   const runfilter = async function (query, data) {
     const ans = await fetch("/jq", {
       method: "POST",
@@ -14,7 +16,7 @@
     });
     const re = await ans.json();
     console.log(re);
-    return re.response;
+    return re;
   };
   const debounce = function (f, t) {
     let callT = Date.now();
@@ -37,12 +39,24 @@
   const jqQueryInput = document.querySelector("#jq-query");
   const jsonInput = document.querySelector("#json");
   const resultDom = document.querySelector("#result");
+  const errorarea = document.querySelector("#error-area");
+  let latestQuery = Math.random();
   const onChange = debounce(async function (ev) {
     const queryVal = jqQueryInput.value;
     const jsonValue = jsonInput.value;
-    const result = await runfilter(queryVal, jsonValue);
-    // resultDom.textContent = JSON.stringify(result, null, 2);
-    resultDom.textContent = result;
+    if (olddata !== jsonValue || oldquery !== queryVal) {
+      olddata = jsonValue;
+      oldquery = queryVal;
+      const curQuery = Math.random();
+      latestQuery = curQuery;
+      const result = await runfilter(queryVal, jsonValue);
+      if (curQuery === latestQuery) {
+        resultDom.textContent = result.response;
+        errorarea.textContent = JSON.stringify(result.error);
+      } else {
+        console.log('diff', curQuery, latestQuery);;
+      }
+    }
   }, 500);
   jqQueryInput.addEventListener("keyup", onChange);
   jqQueryInput.addEventListener("change", onChange);
