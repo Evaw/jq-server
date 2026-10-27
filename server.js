@@ -8,11 +8,12 @@ const debug = (...args) => {
     console.log(...args);
   }
 };
+
 (async function () {
   const { execa } = await import("execa");
-
-  app.use(bodyParser.json());
-
+  app.use(bodyParser.json({
+	  limit: '400kb'
+  }));
   app.post("/jq", async (req, res) => {
     const query = req.body.query;
     const data = req.body.data;
@@ -40,4 +41,6 @@ const debug = (...args) => {
   app.listen(PORT, () => {
     debug(`Static server listening on port ${PORT}`);
   }, PORT);
+
 })();
+
