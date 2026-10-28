@@ -2,7 +2,9 @@
   "name": "jq-server",
   "scripts": {
     "start:dev": "DEBUG=jq-server node server",
-    "start": "node server"
+    "start": "node server",
+    "test": "node --test test/suggest.test.mjs",
+    "bench": "node test/bench.mjs"
   },
   "dependencies": {
     "body-parser": "^1.20.2",

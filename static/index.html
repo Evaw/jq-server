@@ -38,14 +38,60 @@
       #error-area {
         color: red;;
       }
+
+      /* query + completion list */
+      .query-row {
+        position: relative;
+      }
+      #jq-query {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .hint {
+        color: #888;
+      }
+      .suggestions {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        z-index: 10;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        background: #fff;
+        border: 1px solid #bbb;
+        max-height: 16em;
+        overflow-y: auto;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+      .suggestions li {
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+        padding: 1px 6px;
+        cursor: pointer;
+      }
+      .suggestions li.active {
+        background: #cfe3ff;
+      }
+      .suggestions .label {
+        white-space: pre;
+      }
+      .suggestions .detail {
+        color: #777;
+      }
     </style>
   </head>
 
   <body>
     <div>example: '[.[]|{address, unformattedPrice, beds, baths, area, flexFieldText, dateSold: .hdpData.homeInfo.dateSold, livingArea:.hdpData.homeInfo.livingArea, lotAreaValue:  .hdpData.homeInfo.lotAreaValue}]'</div>
-    <div>jq query</div>
+    <div>jq query <span class="hint">(tab to complete, esc to dismiss)</span></div>
 
-    <input id="jq-query" class="" />
+    <div class="query-row">
+      <input id="jq-query" class="" autocomplete="off" spellcheck="false" />
+      <ul id="suggestions" class="suggestions" hidden></ul>
+    </div>
     <div>json <span id="error-area"></span></div>
     <div class="code-area">
       <div name="json-input-container" id="json-input-container" autocomplete="[{id: .[].id}]">
@@ -56,5 +102,5 @@
       </div>
     </div>
   </body>
-  <script src="./js/main.js"></script>
+  <script type="module" src="./js/main.js"></script>
 </html>
